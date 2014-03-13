@@ -29,18 +29,13 @@ public class FormServlet extends HttpServlet {
     {
 		request.setCharacterEncoding("utf-8");
 
-		try
-		{
+		
             // Vérifier les paramètres passés par le formulaire
             String nom = checkUserName(request, response);
             String age = checkUserAge(request, response);
             // Afficher les bons paramètres
 			response.getWriter().write(nom + " " + age + " ans");
-		}
-		catch(NumberFormatException e)
-		{
-			response.getWriter().write("L'âge n'est pas un entier");
-		}
+		
 
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
