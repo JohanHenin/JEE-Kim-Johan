@@ -26,54 +26,58 @@ public class FormServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
+	{
 		request.setCharacterEncoding("utf-8");
 
-		
-            // Vérifier les paramètres passés par le formulaire
-            String nom = checkUserName(request, response);
-            String age = checkUserAge(request, response);
-            // Afficher les bons paramètres
-			response.getWriter().write(nom + " " + age + " ans");
-		
+		String name = request.getParameter("userName");
+		String age = request.getParameter("userAge");
+		// Vérifier les paramètres passés par le formulaire
+		if (checkUserName(name) && checkUserAge(age))
+		{
+			response.getWriter().write(name+ " " + age + " ans");
+		}
+		else
+		{
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Âge ou Nom mal renseigné");
+		}
 
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("utf-8");
 
 	}
 
-    private String checkUserName(HttpServletRequest p_request, HttpServletResponse p_response) throws IOException
-    {
-        String name = "";
+	private boolean checkUserName(String name)
+	{
+		
+		boolean nameEstValide;
+		// Vérifier le nom
+		if(name != "")
+		{
+			nameEstValide = true;
+		}
+		else
+		{
+			nameEstValide = false;
+		}
 
-        // Vérifier le nom
-        if(p_request.getParameter("userName") != null)
-        {
-            name = p_request.getParameter("userName")+" ";
-        }
-        else
-        {
-            p_response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Nom mal rensigné");
-        }
-
-        return name;
-    }
+		return nameEstValide;
+	}
 
 
-    private String checkUserAge(HttpServletRequest p_request, HttpServletResponse p_response) throws IOException
-    {
-        String age = "";
+	boolean checkUserAge(String age)
+	{
+		
+		boolean ageEstValide = false;
+		try
+		{
+			if(Integer.valueOf(age) > 0)
+			{
+				ageEstValide = true;
+			}
+		
+		}
+		catch(Exception e){
+			
+		}
 
-        // Vérifier l'âge
-        if(Integer.valueOf(p_request.getParameter("userAge")) > 0)
-        {
-            age = p_request.getParameter("userAge");
-        }
-        else
-        {
-            p_response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Âge négatif");
-        }
-
-        return age;
-    }
+		return ageEstValide;
+	}
 }
