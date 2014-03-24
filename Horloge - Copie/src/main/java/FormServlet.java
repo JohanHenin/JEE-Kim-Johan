@@ -49,7 +49,7 @@ public class FormServlet extends HttpServlet {
 		
 		boolean nameEstValide;
 		// Vérifier le nom
-		if(name != "")
+		if(! "".equals(name))
 		{
 			nameEstValide = true;
 		}
