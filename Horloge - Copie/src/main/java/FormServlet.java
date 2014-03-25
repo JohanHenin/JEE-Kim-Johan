@@ -34,7 +34,10 @@ public class FormServlet extends HttpServlet {
 		// Vérifier les paramètres passés par le formulaire
 		if (checkUserName(name) && checkUserAge(age))
 		{
-			response.getWriter().write(name+ " " + age + " ans");
+			request.getSession().setAttribute("userName",name);
+			request.getSession().setAttribute("userAge",age);
+			response.sendRedirect("formulairePart2.html");
+			
 		}
 		else
 		{
