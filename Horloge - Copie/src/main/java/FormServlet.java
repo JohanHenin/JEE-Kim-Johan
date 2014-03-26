@@ -25,26 +25,21 @@ public class FormServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
 		request.setCharacterEncoding("utf-8");
 
 		try
 		{
-			if (Integer.valueOf(request.getParameter("userAge")) > 0  && request.getParameter("userName") != null)
-			{
-				String age = request.getParameter("userAge");
-				String nom = request.getParameter("userName");
-				response.getWriter().write(nom + " " + age + " ans");
-			}
-			else
-			{
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Âge négatif ou le nom est mal renseigné"); 
-			}
-
+            // Vérifier les paramètres passés par le formulaire
+            String nom = checkUserName(request, response);
+            String age = checkUserAge(request, response);
+            // Afficher les bons paramètres
+			response.getWriter().write(nom + " " + age + " ans");
 		}
 		catch(NumberFormatException e)
 		{
-			response.getWriter().write("L'âge n'est pas entier");
+			response.getWriter().write("L'âge n'est pas un entier");
 		}
 
 		response.setContentType("text/plain");
@@ -52,4 +47,38 @@ public class FormServlet extends HttpServlet {
 
 	}
 
+    private String checkUserName(HttpServletRequest p_request, HttpServletResponse p_response) throws IOException
+    {
+        String name = "";
+
+        // Vérifier le nom
+        if(p_request.getParameter("userName") != null)
+        {
+            name = p_request.getParameter("userName")+" ";
+        }
+        else
+        {
+            p_response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Nom mal rensigné");
+        }
+
+        return name;
+    }
+
+
+    private String checkUserAge(HttpServletRequest p_request, HttpServletResponse p_response) throws IOException
+    {
+        String age = "";
+
+        // Vérifier l'âge
+        if(Integer.valueOf(p_request.getParameter("userAge")) > 0)
+        {
+            age = p_request.getParameter("userAge");
+        }
+        else
+        {
+            p_response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Âge négatif");
+        }
+
+        return age;
+    }
 }
