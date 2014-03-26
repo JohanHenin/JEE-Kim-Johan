@@ -28,9 +28,9 @@ public class FormServlet2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String street = request.getParameter("street");
+		String street = request.getParameter("userStreet");
 		String city = request.getParameter("city");
-		String postalCode = request.getParameter("postalCode");
+		String postalCode = request.getParameter("userPostalCode");
 		String name = (String) request.getSession().getAttribute("userName");
 		String age = (String) request.getSession().getAttribute("userAge");
 		if (checkAddress(street,city,postalCode)){
