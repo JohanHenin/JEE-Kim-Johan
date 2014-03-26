@@ -29,7 +29,7 @@ public class FormServlet2 extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String street = request.getParameter("userStreet");
-		String city = request.getParameter("city");
+		String city = request.getParameter("userCity");
 		String postalCode = request.getParameter("userPostalCode");
 		String name = (String) request.getSession().getAttribute("userName");
 		String age = (String) request.getSession().getAttribute("userAge");
