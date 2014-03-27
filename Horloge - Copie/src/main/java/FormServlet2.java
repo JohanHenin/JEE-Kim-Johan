@@ -36,7 +36,7 @@ public class FormServlet2 extends HttpServlet {
 		if (checkAddress(street,city,postalCode)){
 			response.getWriter().write("Nom: " + name + "\n" +
 					"Age: " + age + " ans" + "\n" +
-					street + " " + postalCode + " " + city);
+					"Adresse : " + street + " " + postalCode + " " + city);
 		}
 		else{
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Une ou plusieurs information(s) est/sont mal renseignee(s)");

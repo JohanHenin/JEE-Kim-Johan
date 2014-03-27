@@ -1,6 +1,9 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,14 +47,18 @@ public class FormServletSansSession extends HttpServlet {
 			{
 				case "who":
 				{
-					String name = request.getParameter("userName");
-					String age = request.getParameter("userAge");
+					request.setCharacterEncoding("utf-8");
+					String userName = request.getParameter("userName");
+					String userAge = request.getParameter("userAge");
 					
 					// Vérifier les paramètres passés par le formulaire
-					if (checkUserName(name) && checkUserAge(age))
+					if (checkUserName(userName) && checkUserAge(userAge))
 					{
-						
-						response.sendRedirect("formulaireSansSession2.html?name="+name+"&age="+age);
+						// Créer le 2nd formulaire 
+						response.setContentType("text/html");  
+				        PrintWriter printWriter = response.getWriter(); 
+						CreateSecondForm(printWriter, userName, userAge);
+						printWriter.close(); 
 					}
 					else
 					{
@@ -62,14 +69,22 @@ public class FormServletSansSession extends HttpServlet {
 				}
 				case "where":
 				{
-					// Récupérer URL
-					StringBuffer requestURL = request.getRequestURL();
-					if (request.getQueryString() != null) {
-					    requestURL.append("?").append(request.getQueryString());
-					}
-					String completeURL = requestURL.toString();
+					request.setCharacterEncoding("utf-8");
+					String userName = request.getParameter("userName");
+					String userAge = request.getParameter("userAge");
+					String street = request.getParameter("userStreet");
+					String city = request.getParameter("userCity");
+					String postalCode = request.getParameter("userPostalCode");
 					
-					System.out.println(completeURL);
+					if (checkUserName(userName) && checkUserAge(userAge) && checkAddress(street,city,postalCode))
+					{
+						response.getWriter().write("Nom: " + userName + "\n" +
+								"Age: " + userAge + " ans" + "\n" +
+								"Adresse : " + street + " " + postalCode + " " + city);
+					}
+					else{
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Une ou plusieurs information(s) est/sont mal renseignee(s)");
+					}
 					
 					break;
 				}
@@ -82,6 +97,10 @@ public class FormServletSansSession extends HttpServlet {
 		}
 		
 	}
+	
+	/*
+	 * Fonctions to check form data
+	 */
 	
 	private boolean checkAction(String p_action)
 	{
@@ -141,6 +160,42 @@ public class FormServletSansSession extends HttpServlet {
 		}
 
 		return ageEstValide;
+	}
+	
+	private boolean checkAddress(String street, String city, String postalCode){
+		boolean AddressOk = false;
+		Pattern pattern = Pattern.compile("[0-9]{5}");
+		Matcher matcher = pattern.matcher(postalCode);
+		if (matcher.matches() && !"".equals(street) && !"".equals(city))
+		{
+			AddressOk = true;
+		}
+		return AddressOk;
+	}
+	
+	/*
+	 * Fonction to create the 2nd form
+	 */
+	
+	private void CreateSecondForm(PrintWriter p_printWriter, String p_userName, String p_userAge)
+	{
+		try
+		{
+			//creating form that have invisible textfield  
+			p_printWriter.print("<form action='FormServletSansSession' method='post' accept-charset='utf-8'>");  
+			p_printWriter.print("Rue : <input type='text' name='userStreet' />");  
+			p_printWriter.print("Code Postal : <input type='text' name='userPostalCode'/> ");
+			p_printWriter.print("Ville : <input type='text' name='userCity' />"); 
+			p_printWriter.print("<input type='hidden' name='userName' value='"+p_userName+"'/>");  
+			p_printWriter.print("<input type='hidden' name='userAge' value='"+p_userAge+"'/>");  
+			p_printWriter.print("<input type='hidden' name='action' value='where'/>");  
+			p_printWriter.print("<input type='submit' />");  
+			p_printWriter.print("</form>");     
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}  
 	}
 
 }
