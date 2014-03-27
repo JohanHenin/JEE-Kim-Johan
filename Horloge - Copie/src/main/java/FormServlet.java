@@ -65,7 +65,7 @@ public class FormServlet extends HttpServlet {
 	}
 
 
-	boolean checkUserAge(String age)
+	private boolean checkUserAge(String age)
 	{
 		
 		boolean ageEstValide = false;
