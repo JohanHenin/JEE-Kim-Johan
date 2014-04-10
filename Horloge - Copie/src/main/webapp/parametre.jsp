@@ -20,13 +20,18 @@
 </head>
 <body>
     <table>
-        <c:forEach var="element" items="${param}" >
+        <c:forEach var="parameter" items="${paramValues}" >
             <tr>
-                <td> <c:out value="${element.key}"      default="inconnu" /></td>
-                <td> <c:out value="${element.value}"    default="inconnu" /></td>
+                <td> <c:out value='${parameter.key}'/> 
+                <td>
+                 <c:forEach var='value' items='${parameter.value}'>  
+               <%-- Show the String value --%>  
+               <c:out value='${value}'/>     
+            </c:forEach>
+                 <!--<c:out value="${element.value}"    default="inconnu" />-->
+                 </td>
             </tr>
         </c:forEach>
     </table>
-
 </body>
 </html>
