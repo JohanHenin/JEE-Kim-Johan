@@ -29,7 +29,7 @@ public class adhesionOkServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.getRequestDispatcher("/adhesionvalide.jsp").forward(request, response);
-	
+
 	}
 
 }
