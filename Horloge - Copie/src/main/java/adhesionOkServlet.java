@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CheckAdhesionServlet
+ * Servlet implementation class adhesionOkServlet
  */
-@WebServlet("/CheckAdhesionServlet")
-public class CheckAdhesionServlet extends HttpServlet {
+@WebServlet("/adhesionOkServlet")
+public class adhesionOkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckAdhesionServlet() {
+    public adhesionOkServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,31 +27,9 @@ public class CheckAdhesionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-
-		String login = request.getParameter("login");
-		String email = request.getParameter("email");
 		
-		if (checkMail(email) && checkLogin(login)){
-			request.getRequestDispatcher("adhesionOkServlet").forward(request, response);
-			
-		}
-		else{
-				
-		}
-
-	}
+		request.getRequestDispatcher("/adhesionvalide.jsp").forward(request, response);
 	
-	private boolean checkMail(String email){
-		boolean mailValide = false;
-		
-		return true;
-	}
-	
-	private boolean checkLogin(String login){
-		boolean loginValide = false;
-		
-		return true;
 	}
 
 }
