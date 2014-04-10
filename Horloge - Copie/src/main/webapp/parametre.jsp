@@ -6,9 +6,23 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<c:forEach var="name" items="${requestScope['ListName']}">
-		<option value="${ListName.nom}">${ListName.nom}</option>
-	</c:forEach>
-	${param}
+	<table>
+	     <c:forEach var='parameter' items='${paramValues}'>   
+         <ul>  
+            <%-- Show the key, which is the request parameter  
+                 name --%>  
+            <li><b><c:out value='${parameter.key}'/></b>:</li>  
+   
+            <%-- Iterate over the values -- a String[] --   
+                 associated with this request parameter --%>  
+            <c:forEach var='value' items='${parameter.value}'>  
+               <%-- Show the String value --%>  
+               <c:out value='${value}'/>     
+            </c:forEach>  
+         </ul>  
+      </c:forEach>  
+	</table>
+	${param["language"]}
+	<%out.print(request.getParameterValues("version")); %>
 </body>
 </html>
