@@ -1,6 +1,8 @@
 
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,8 +38,10 @@ public class FormServlet extends HttpServlet {
 		{
 			request.getSession().setAttribute("userName",name);
 			request.getSession().setAttribute("userAge",age);
-			response.sendRedirect("formulairePart2.html");
-			
+			//response.sendRedirect("formulairePart2.html");
+
+			request.getRequestDispatcher("/formulairePart2.html").forward(request, response);
+
 		}
 		else
 		{
@@ -49,7 +53,7 @@ public class FormServlet extends HttpServlet {
 
 	private boolean checkUserName(String name)
 	{
-		
+
 		boolean nameEstValide;
 		// Vérifier le nom
 		if(! "".equals(name))
@@ -67,7 +71,7 @@ public class FormServlet extends HttpServlet {
 
 	private boolean checkUserAge(String age)
 	{
-		
+
 		boolean ageEstValide = false;
 		try
 		{
@@ -75,10 +79,10 @@ public class FormServlet extends HttpServlet {
 			{
 				ageEstValide = true;
 			}
-		
+
 		}
 		catch(Exception e){
-			
+
 		}
 
 		return ageEstValide;
