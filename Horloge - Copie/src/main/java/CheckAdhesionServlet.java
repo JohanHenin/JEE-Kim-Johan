@@ -74,7 +74,7 @@ public class CheckAdhesionServlet extends HttpServlet {
 		boolean loginValide = false;
 
         // Vérifier le login
-        if( (! "".equals(login) ) && (login.length() > 5) )
+        if( (! "".equals(login) ) && (login.length() >= 5) )
         {
             loginValide = true;
         }

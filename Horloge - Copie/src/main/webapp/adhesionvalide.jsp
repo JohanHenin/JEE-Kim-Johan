@@ -9,6 +9,7 @@
     <jsp:useBean id="now" scope="page" class="java.util.Date"/>
 
    	Bienvenue ${param.login}, votre inscription a bien été prise en compte
-    le <fmt:formatDate value="${now}" pattern="dd MMM yyyy à HH:mm:ss" />
+    le ${date}  à ${heure}
+  
   </body>
 </html>

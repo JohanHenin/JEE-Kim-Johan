@@ -1,6 +1,8 @@
 
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,10 +26,14 @@ public class adhesionOkServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request,  response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("toto", "connard");
+		Date date_actuelle = new Date();
+		String dateString = DateFormat.getDateInstance(DateFormat.FULL).format(date_actuelle);
+	    String timeString = DateFormat.getTimeInstance(DateFormat.FULL).format(date_actuelle);
+	    request.setAttribute("heure", timeString);
+	    request.setAttribute("date", dateString);
 		request.getRequestDispatcher("/adhesionvalide.jsp").forward(request, response);
 
 	}
