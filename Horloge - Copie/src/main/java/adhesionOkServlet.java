@@ -27,7 +27,7 @@ public class adhesionOkServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setAttribute("toto", "connard");
 		request.getRequestDispatcher("/adhesionvalide.jsp").forward(request, response);
 
 	}
