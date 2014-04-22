@@ -1,4 +1,5 @@
 <%@page pageEncoding="UTF-8" contentType="text/html" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
   <head>
