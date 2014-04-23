@@ -53,10 +53,12 @@ public class TestInscriptionServletMockito
 	  public void testMockitoDoPost() throws Exception
 	  {
 		  //TODO : problème à cause foward
-		  final ServletConfig servletConfig = mock(ServletConfig.class);
-	      final ServletContext servletContext = mock(ServletContext.class);
-	      when(servletConfig.getServletContext()).thenReturn(servletContext);
-	      inscriptionServlet.init(servletConfig);
+		  //final ServletConfig servletConfig = mock(ServletConfig.class);
+	      //final ServletContext servletContext = mock(ServletContext.class);
+	      //when(servletConfig.getServletContext()).thenReturn(servletContext);
+	      //inscriptionServlet.init(servletConfig);
+		  final ServletContext servletContext = mock(ServletContext.class);
+		  when(mockitoRequest.getServletContext()).thenReturn(servletContext);
 	      
 		  when(mockitoRequest.getParameter("login")).thenReturn("me");
 	      when(mockitoRequest.getParameter("email")).thenReturn("testemail@gmail.com");
