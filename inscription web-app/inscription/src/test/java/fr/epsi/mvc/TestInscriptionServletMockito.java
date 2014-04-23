@@ -3,6 +3,8 @@ package fr.epsi.mvc;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +18,6 @@ public class TestInscriptionServletMockito
 {
 	HttpServletRequest mockitoRequest;
 	HttpServletResponse mockitoResponse;
-	
 	InscriptionServlet inscriptionServlet;
 	
 	@Before
@@ -51,6 +52,20 @@ public class TestInscriptionServletMockito
 	  @Test
 	  public void testMockitoDoPost() throws Exception
 	  {
-		  //TODO
+		  //TODO : problème context
+		  final ServletConfig servletConfig = mock(ServletConfig.class);
+	      final ServletContext servletContext = mock(ServletContext.class);
+	      when(servletConfig.getServletContext()).thenReturn(servletContext);
+	      inscriptionServlet.init(servletConfig);
+	      
+		  when(mockitoRequest.getParameter("login")).thenReturn("me");
+	      when(mockitoRequest.getParameter("email")).thenReturn("testemail@gmail.com");
+	      when(mockitoRequest.getParameter("conditionsGeneralesApprouvees")).thenReturn("true");
+	      
+	      inscriptionServlet.doPost(mockitoRequest, mockitoResponse);
+		  
+		  verify(mockitoRequest, atLeast(1)).getParameter("login");
+		  verify(mockitoRequest, atLeast(1)).getParameter("email");
+		  verify(mockitoRequest, atLeast(1)).getParameter("conditionsGeneralesApprouvees");
 	  }
 }
