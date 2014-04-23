@@ -52,7 +52,7 @@ public class TestInscriptionServletMockito
 	  @Test
 	  public void testMockitoDoPost() throws Exception
 	  {
-		  //TODO : problème context
+		  //TODO : problème à cause foward
 		  final ServletConfig servletConfig = mock(ServletConfig.class);
 	      final ServletContext servletContext = mock(ServletContext.class);
 	      when(servletConfig.getServletContext()).thenReturn(servletContext);
