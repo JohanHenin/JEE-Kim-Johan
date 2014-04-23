@@ -1,5 +1,6 @@
 package fr.epsi.mvc;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,16 +14,16 @@ import static org.mockito.Mockito.*;
 
 public class TestInscriptionServletMockito 
 {
-	HttpServletRequest request;
-	HttpServletResponse response;
+	HttpServletRequest mockitoRequest;
+	HttpServletResponse mockitoResponse;
 	
 	InscriptionServlet inscriptionServlet;
 	
 	@Before
 	public void setUp() throws Exception
 	{
-		request = mock(HttpServletRequest.class); 
-		response = mock(HttpServletResponse.class);
+		mockitoRequest = mock(HttpServletRequest.class); 
+		mockitoResponse = mock(HttpServletResponse.class);
 		
 		inscriptionServlet = new InscriptionServlet();
 	}
@@ -30,12 +31,26 @@ public class TestInscriptionServletMockito
 	 @Test
 	  public void testDemoMockito() throws Exception 
 	  {
-	        when(request.getParameter("login")).thenReturn("me");
-	        when(request.getParameter("email")).thenReturn("testemail@gmail.com");
-	        when(request.getParameter("conditionsGeneralesApprouvees")).thenReturn("true");
-
-	        inscriptionServlet.doPost(request, response);
-
-	        assertNotNull(request.getAttribute("inscription"));
+	        when(mockitoRequest.getParameter("login")).thenReturn("me");
+	        when(mockitoRequest.getParameter("email")).thenReturn("testemail@gmail.com");
+	        when(mockitoRequest.getParameter("conditionsGeneralesApprouvees")).thenReturn("true");
+	        
+	        String parameterValueLogin = mockitoRequest.getParameter("login");
+	        String parameterValueEmail = mockitoRequest.getParameter("email");
+	        String parameterValueconditionsGeneralesApprouvees = mockitoRequest.getParameter("conditionsGeneralesApprouvees");
+	        
+	        assertThat(parameterValueLogin, is("me") );
+	        assertThat(parameterValueEmail, is("testemail@gmail.com") );
+	        assertThat(parameterValueconditionsGeneralesApprouvees, is("true") );
+	        
+	        verify(mockitoRequest).getParameter("login");
+	        verify(mockitoRequest).getParameter("email");
+	        verify(mockitoRequest).getParameter("conditionsGeneralesApprouvees");
+	  }
+	 
+	  @Test
+	  public void testMockitoDoPost() throws Exception
+	  {
+		  //TODO
 	  }
 }
