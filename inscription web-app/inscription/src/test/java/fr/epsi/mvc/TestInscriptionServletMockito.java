@@ -1,17 +1,16 @@
 package fr.epsi.mvc;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 
@@ -59,8 +58,19 @@ public class TestInscriptionServletMockito
 	      //when(servletConfig.getServletContext()).thenReturn(servletContext);
 	      //inscriptionServlet.init(servletConfig);
 		  final ServletContext servletContext = mock(ServletContext.class);
+          RequestDispatcher dispatcher = new RequestDispatcher() {
+              @Override
+              public void forward(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+
+              }
+
+              @Override
+              public void include(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+
+              }
+          };
 		  when(mockitoRequest.getServletContext()).thenReturn(servletContext);
-          when(mockitoRequest.getServletContext()).getRequestDispatcher("/WEB-INF/views/inscriptionOk.jsp").thenReturn("/WEB-INF/views/inscriptionOk.jsp");
+          when(mockitoRequest.getServletContext().getRequestDispatcher("/WEB-INF/views/inscriptionOk.jsp")).thenReturn(dispatcher);
 	      
 		  when(mockitoRequest.getParameter("login")).thenReturn("me");
 	      when(mockitoRequest.getParameter("email")).thenReturn("testemail@gmail.com");
