@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Horloge (2):war">
+    <output-path>$PROJECT_DIR$/Horloge - Copie/target/m2e-wtp/web-resources/META-INF/maven/fr.epsi/Horloge/target</output-path>
+    <root id="archive" name="Horloge-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Horloge (2):war exploded" />
+    </root>
+  </artifact>
+</component>

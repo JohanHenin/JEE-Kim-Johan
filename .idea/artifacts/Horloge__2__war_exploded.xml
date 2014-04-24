@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Horloge (2):war exploded">
+    <output-path>$PROJECT_DIR$/Horloge - Copie/target/m2e-wtp/web-resources/META-INF/maven/fr.epsi/Horloge/target/Horloge-0.0.1-SNAPSHOT</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Horloge (2)/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Horloge (2)" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: net.sf.barcode4j:barcode4j:2.1" />
+          <element id="library" level="project" name="Maven: avalon-framework:avalon-framework-impl:4.2.0" />
+          <element id="library" level="project" name="Maven: commons-cli:commons-cli:1.0" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.0" />
+          <element id="library" level="project" name="Maven: commons-lang:commons-lang:1.0" />
+          <element id="library" level="project" name="Maven: junit:junit:3.7" />
+          <element id="library" level="project" name="Maven: org.apache.ant:ant:1.7.1" />
+          <element id="library" level="project" name="Maven: org.apache.ant:ant-launcher:1.7.1" />
+          <element id="library" level="project" name="Maven: avalon-framework:avalon-framework-api:4.2.0" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

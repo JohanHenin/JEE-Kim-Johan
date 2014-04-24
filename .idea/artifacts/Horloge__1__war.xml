@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Horloge (1):war">
+    <output-path>$PROJECT_DIR$/Horloge - Copie/target</output-path>
+    <root id="archive" name="Horloge-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Horloge (1):war exploded" />
+    </root>
+  </artifact>
+</component>

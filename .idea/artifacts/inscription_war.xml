@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="inscription:war">
+    <output-path>$PROJECT_DIR$/inscription web-app/inscription/target</output-path>
+    <root id="archive" name="inscription-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="inscription:war exploded" />
+    </root>
+  </artifact>
+</component>
