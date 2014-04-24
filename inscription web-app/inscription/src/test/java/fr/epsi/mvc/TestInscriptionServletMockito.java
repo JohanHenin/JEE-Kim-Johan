@@ -3,6 +3,7 @@ package fr.epsi.mvc;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ public class TestInscriptionServletMockito
 		
 		inscriptionServlet = new InscriptionServlet();
 	}
-	
+
 	 @Test
 	  public void testDemoMockito() throws Exception 
 	  {
@@ -59,6 +60,7 @@ public class TestInscriptionServletMockito
 	      //inscriptionServlet.init(servletConfig);
 		  final ServletContext servletContext = mock(ServletContext.class);
 		  when(mockitoRequest.getServletContext()).thenReturn(servletContext);
+          when(mockitoRequest.getServletContext()).getRequestDispatcher("/WEB-INF/views/inscriptionOk.jsp").thenReturn("/WEB-INF/views/inscriptionOk.jsp");
 	      
 		  when(mockitoRequest.getParameter("login")).thenReturn("me");
 	      when(mockitoRequest.getParameter("email")).thenReturn("testemail@gmail.com");
