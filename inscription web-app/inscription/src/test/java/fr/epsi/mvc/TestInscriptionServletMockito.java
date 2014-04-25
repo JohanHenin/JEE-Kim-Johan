@@ -65,6 +65,8 @@ public class TestInscriptionServletMockito
               }
           };
 
+          inscriptionServlet.doGet(mockitoRequest, mockitoResponse);
+
           when(mockitoRequest.getServletContext()).thenReturn(servletContext);
           when(mockitoRequest.getServletContext().getRequestDispatcher("/WEB-INF/views/inscription.jsp")).thenReturn(dispatcher);
 
