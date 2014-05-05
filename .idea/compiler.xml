@@ -24,13 +24,19 @@
         <processorPath useClasspath="true" />
         <module name="Horloge (1)" />
         <module name="Horloge (2)" />
-        <module name="webapp" />
+        <module name="inscription" />
+        <module name="tests_unitaires" />
+        <module name="webapp (1)" />
+        <module name="webapp (2)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Horloge (1)" target="1.7" />
       <module name="Horloge (2)" target="1.7" />
-      <module name="webapp" target="1.7" />
+      <module name="inscription" target="1.7" />
+      <module name="tests_unitaires" target="1.7" />
+      <module name="webapp (1)" target="1.7" />
+      <module name="webapp (2)" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -52,11 +53,16 @@ public class TestInscriptionServletMockito
       @Test
       public void testMockitoDoGet() throws Exception
       {
+          // Vue attendue
+          final String vue = "/WEB-INF/views/inscription.jsp";
+          // Pour forward
           final ServletContext servletContext = mock(ServletContext.class);
           final RequestDispatcher dispatcher = new RequestDispatcher() {
+
               @Override
               public void forward(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
-
+                  // Set la vue attendue dans le dispatcher de test
+                  servletRequest.getServletContext().getRequestDispatcher(vue);
               }
 
               @Override
@@ -69,6 +75,9 @@ public class TestInscriptionServletMockito
           when(mockitoRequest.getServletContext().getRequestDispatcher("/WEB-INF/views/inscription.jsp")).thenReturn(dispatcher);
 
           inscriptionServlet.doGet(mockitoRequest, mockitoResponse);
+
+          // Vérifier le dispatcher = un  aiguilleur
+          assertEquals(dispatcher, mockitoRequest.getServletContext().getRequestDispatcher(vue) );
       }
 
 	  @Test
@@ -79,12 +88,16 @@ public class TestInscriptionServletMockito
 	      when(mockitoRequest.getParameter("email")).thenReturn("testemail@gmail.com");
 	      when(mockitoRequest.getParameter("conditionsGeneralesApprouvees")).thenReturn("true");
 
+          // Vue attendue
+          final String vue = "/WEB-INF/views/inscriptionOk.jsp";
           // Pour forward
           final ServletContext servletContext = mock(ServletContext.class);
           final RequestDispatcher dispatcher = new RequestDispatcher() {
+
               @Override
               public void forward(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
-
+                  // Set la vue attendue dans le dispatcher de test
+                  servletRequest.getServletContext().getRequestDispatcher(vue);
               }
 
               @Override
@@ -94,12 +107,16 @@ public class TestInscriptionServletMockito
           };
 
           when(mockitoRequest.getServletContext()).thenReturn(servletContext);
-          when(mockitoRequest.getServletContext().getRequestDispatcher("/WEB-INF/views/inscriptionOk.jsp")).thenReturn(dispatcher);
+          when(mockitoRequest.getServletContext().getRequestDispatcher(vue)).thenReturn(dispatcher);
 
 	      inscriptionServlet.doPost(mockitoRequest, mockitoResponse);
 
-		  verify(mockitoRequest, atLeast(1)).getParameter("login");
-		  verify(mockitoRequest, atLeast(1)).getParameter("email");
-		  verify(mockitoRequest, atLeast(1)).getParameter("conditionsGeneralesApprouvees");
+          // Vérifier les données passées
+          assertEquals("me", mockitoRequest.getParameter("login"));
+          assertEquals("testemail@gmail.com", mockitoRequest.getParameter("email"));
+          assertEquals("true", mockitoRequest.getParameter("conditionsGeneralesApprouvees"));
+
+          // Vérifier le dispatcher = un  aiguilleur
+          assertEquals(dispatcher, mockitoRequest.getServletContext().getRequestDispatcher(vue) );
 	  }
 }
