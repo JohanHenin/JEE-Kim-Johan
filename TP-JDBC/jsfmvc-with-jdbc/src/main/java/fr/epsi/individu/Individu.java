@@ -23,7 +23,14 @@ public class Individu {
 	@Min(value = 0, message = "L'âge ne peut pas être négatif")
 	@Max(value = 150, message = "L'âge est incorrect")
 	private Integer age;
-
+	
+	public Individu(String nom, String prenom, int age,long id){
+		this.nom = nom;
+		this.prenom = prenom;
+		this.age = age;
+		this.id = id;
+	}
+	
 	public Long getId() {
 		return id;
 	}
