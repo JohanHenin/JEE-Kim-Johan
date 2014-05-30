@@ -31,6 +31,10 @@ public class Individu {
 		this.id = id;
 	}
 	
+	public Individu(){
+		super();
+	}
+	
 	public Long getId() {
 		return id;
 	}

@@ -25,7 +25,7 @@ public class IndividuRepository {
 		Connection connection = dataSource.getConnection();
 		try {
 			
-			String request = "insert into individus (prenom,nom,age,id_individu) values (?, ?, ?,(select max(id_individu) + 1 from individus))";
+			String request = "insert into individus (prenom,nom,age,id_individu) values (?, ?, ?,sequence_id_individu.nextval)";
 			
 			PreparedStatement pstmt = connection.prepareStatement(request);
 			try {
@@ -52,6 +52,7 @@ public class IndividuRepository {
 
 	public List<Individu> getAll() throws SQLException {
 		List<Individu> result = new ArrayList<>();
+		ResultSet individus = null;
 		Connection connection = dataSource.getConnection();
 		try {
 			
@@ -59,17 +60,18 @@ public class IndividuRepository {
 			
 			PreparedStatement pstmt = connection.prepareStatement(request);
 			try {
-				ResultSet individus = pstmt.executeQuery();
+				individus = pstmt.executeQuery();
 				while (individus.next()) {     
 					result.add(new Individu(individus.getString(1),individus.getString(2),individus.getInt(3),individus.getLong(4)));
 				}
-				if(individus != null){
-					individus.close();
-				}
+			
 			}
 			finally{
 				if (pstmt != null) {
 					pstmt.close();
+				}
+				if(individus != null){
+					individus.close();
 				}
 				
 			}
